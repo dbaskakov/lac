@@ -1,0 +1,11 @@
+[Unit]
+Description=Part 5
+
+[Mount]
+What=/dev/md127p5
+Where=/raid/part5
+Type=ext4
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target

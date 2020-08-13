@@ -69,12 +69,10 @@ Vagrant.configure("2") do |config|
   
         box.vm.provision "shell", inline: <<-SHELL
             mkdir -p ~root/.ssh
-            cp /vagrant/gpt.sh ~/gpt.sh
-            chmox +x /root/gpt.sh
+            cp /vagrant/script.sh ~/script.sh
+            chmox +x /root/script.sh
             cp ~vagrant/.ssh/auth* ~root/.ssh
-            yum install -y mdadm smartmontools hdparm gdisk
-            mdadm --create /dev/md/raid1 --level=1 --raid-devices=2 /dev/sdd /dev/sde --metadata=0.90
-            bash /root/gpt.sh
+            bash /root/script.sh
           SHELL
   
         end
