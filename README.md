@@ -50,4 +50,4 @@ cd 4_nfs && vagrant up
 +1 - сделан еще и докер образ
 ```
 cd 5_rpm && vagrant up
-docker image --> https://hub.docker.com/r/impel1o/fluentd
+docker image --> https://hub.docker.com/r/impel1o/nginx
