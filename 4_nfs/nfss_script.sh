@@ -2,6 +2,7 @@
 
 mkdir -p /var/nfs_share
 mkdir -p /var/nfs_share/upload
+chmod 0777 /var/nfs_share/upload
 yum install nfs-utils -y
 echo '/var/nfs_share/  192.168.50.11(rw,async,no_root_squash,no_all_squash)' >> /etc/exports
 systemctl enable nfs-server
