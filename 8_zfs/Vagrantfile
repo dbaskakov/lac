@@ -97,7 +97,7 @@ config.vm.define "server" do |server|
 
   server.vm.provision "shell",
     name: "Setup zfs",
-    path: "setup_zfs.sh"
+    path: "script.sh"
   end
 
 

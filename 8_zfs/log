@@ -1,0 +1,122 @@
+sudo zpool create zpool sdf
+sudo zpool status
+
+  pool: zpool
+ state: ONLINE
+  scan: none requested
+config:
+
+        NAME        STATE     READ WRITE CKSUM
+        zpool       ONLINE       0     0     0
+          sdf       ONLINE       0     0     0
+
+errors: No known data errors
+
+echo -n gzip gzip-{1..9} lz4 lzjb zle | xargs -d" " -I{} sudo zfs create -o compression={} zpool/{}
+zfs list
+[root@10 gzip]# zfs list
+NAME                      USED  AVAIL     REFER  MOUNTPOINT
+zpool                     589M   243M     36.5K  /zpool
+zpool/gzip               35.9M   243M     35.9M  /zpool/gzip
+zpool/gzip-1             41.1M   243M     41.1M  /zpool/gzip-1
+zpool/gzip-2             39.7M   243M     39.7M  /zpool/gzip-2
+zpool/gzip-3             38.7M   243M     38.7M  /zpool/gzip-3
+zpool/gzip-4             37.1M   243M     37.1M  /zpool/gzip-4
+zpool/gzip-5             36.2M   243M     36.2M  /zpool/gzip-5
+zpool/gzip-6             35.9M   243M     35.9M  /zpool/gzip-6
+zpool/gzip-7             35.9M   243M     35.9M  /zpool/gzip-7
+zpool/gzip-8             35.8M   243M     35.8M  /zpool/gzip-8
+zpool/gzip-9             35.8M   243M     35.8M  /zpool/gzip-9
+zpool/lz4                55.3M   243M     55.3M  /zpool/lz4
+zpool/lzjb               65.9M   243M     65.9M  /zpool/lzjb
+zpool/zle                95.5M   243M     95.5M  /zpool/zle
+echo -n gzip gzip-{1..9} lz4 lzjb zle | xargs -d" " -I{} sudo zfs get compression zpool/{} | grep compression
+wget http://mattmahoney.net/dc/enwik8.zip
+unzip enwik8.zip
+cd /
+echo -n gzip gzip-{1..9} lz4 lzjb zle | xargs -d" " -I{} sudo cp enwik8 /zpool/{}/
+echo -n gzip gzip-{1..9} lz4 lzjb zle | xargs -d" " -I{} sudo zfs get compressratio zpool/{} | grep compressratio
+
+# gzip - standard UNIX compression.
+# gzip- N - selects a specific gzip level. ...
+# lz4 - provides better compression with lower CPU overhead.
+# lzjb - optimized for performance while providing decent compression.
+# zle - zero length encoding is useful for datasets with large blocks of zeros.
+
+zpool/gzip  compressratio  2.66x  -
+zpool/gzip-1  compressratio  2.32x  -
+zpool/gzip-2  compressratio  2.40x  -
+zpool/gzip-3  compressratio  2.47x  -
+zpool/gzip-4  compressratio  2.57x  -
+zpool/gzip-5  compressratio  2.64x  -
+zpool/gzip-6  compressratio  2.66x  -
+zpool/gzip-7  compressratio  2.66x  -
+zpool/gzip-8  compressratio  2.66x  -
+zpool/gzip-9  compressratio  2.66x  -
+zpool/lz4  compressratio  1.72x  -
+zpool/lzjb  compressratio  1.44x  -
+zpool/zle  compressratio  1.00x  -
+
+gzip,gzip{6-9}
+
+----------------------------------------------------------
+cd ~
+wget -O zfsdisk.img.tar.gz "https://drive.google.com/u/0/uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg&export=download"
+tar xvzf zfsdisk.img.tar.gz
+zpool import -d zpoolexport
+
+[root@10 zpoolexport]# sudo zpool import -d zpoolexport
+no pools available to import
+[root@10 zpoolexport]# cd ..
+[root@10 ~]# sudo zpool import -d zpoolexport
+   pool: otus
+     id: 6554193320433390805
+  state: ONLINE
+ action: The pool can be imported using its name or numeric identifier.
+ config:
+
+        otus                         ONLINE
+          mirror-0                   ONLINE
+            /root/zpoolexport/filea  ONLINE
+            /root/zpoolexport/fileb  ONLINE
+
+zpool import -d zpoolexport/ otus
+
+```
+[root@10 hometask2]# ls
+dir1    dir12  dir16  dir2   dir23  dir27  dir30  dir34  dir38  dir41  dir45  dir49  dir52  dir56  dir6   dir63  dir67  dir70  dir74  dir78  dir81  dir85  dir89  dir92  dir96
+dir10   dir13  dir17  dir20  dir24  dir28  dir31  dir35  dir39  dir42  dir46  dir5   dir53  dir57  dir60  dir64  dir68  dir71  dir75  dir79  dir82  dir86  dir9   dir93  dir97
+dir100  dir14  dir18  dir21  dir25  dir29  dir32  dir36  dir4   dir43  dir47  dir50  dir54  dir58  dir61  dir65  dir69  dir72  dir76  dir8   dir83  dir87  dir90  dir94  dir98
+dir11   dir15  dir19  dir22  dir26  dir3   dir33  dir37  dir40  dir44  dir48  dir51  dir55  dir59  dir62  dir66  dir7   dir73  dir77  dir80  dir84  dir88  dir91  dir95  dir99
+[root@10 hometask2]# ls -l | wc -l
+101
+```
+
+-----------------------------------------------------------------------------------------------------------------------------
+cd ~
+wget -O zfsdisk.img.tar.gz "https://drive.google.com/u/0/uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg&export=download"
+tar xvzf zfsdisk.img.tar.gz
+zpool import -d zpoolexport
+zpool import -d zpoolexport/ otus
+
+
+wget -O zadanie3 https://drive.google.com/u/0/uc?id=1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG&export=download
+
+zfs receive otus/data < zadanie3
+zfs list
+ls -lah
+-rw-r--r--. 1 root    root       0 May 15  2020 10M.file
+-rw-r--r--. 1 root    root    303K May 15  2020 Limbo.txt
+-rw-r--r--. 1 root    root    498K May 15  2020 Moby_Dick.txt
+-rw-r--r--. 1 root    root    1.2M May  6  2016 War_and_Peace.txt
+-rw-r--r--. 1 root    root    710K May 15  2020 cinderella.tar
+-rw-r--r--. 1 root    root      65 May 15  2020 for_examaple.txt
+-rw-r--r--. 1 root    root       0 May 15  2020 homework4.txt
+drwxr-xr-x. 3 vagrant vagrant    4 Dec 18  2017 task1
+-rw-r--r--. 1 root    root    390K May 15  2020 world.sql
+
+
+find data -name 'secret_message'
+
+cat data/task1/file_mess/secret_message
+https://github.com/sindresorhus/awesome
