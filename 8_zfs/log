@@ -1,3 +1,6 @@
+--------------------------------------------------------------------------------------
+Задание 1
+
 sudo zpool create zpool sdf
 sudo zpool status
 
@@ -60,6 +63,8 @@ zpool/zle  compressratio  1.00x  -
 gzip,gzip{6-9}
 
 ----------------------------------------------------------
+Задание 2
+
 cd ~
 wget -O zfsdisk.img.tar.gz "https://drive.google.com/u/0/uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg&export=download"
 tar xvzf zfsdisk.img.tar.gz
@@ -93,11 +98,7 @@ dir11   dir15  dir19  dir22  dir26  dir3   dir33  dir37  dir40  dir44  dir48  di
 ```
 
 -----------------------------------------------------------------------------------------------------------------------------
-cd ~
-wget -O zfsdisk.img.tar.gz "https://drive.google.com/u/0/uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg&export=download"
-tar xvzf zfsdisk.img.tar.gz
-zpool import -d zpoolexport
-zpool import -d zpoolexport/ otus
+Задание 3
 
 
 wget -O zadanie3 https://drive.google.com/u/0/uc?id=1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG&export=download
