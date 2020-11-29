@@ -12,7 +12,7 @@
 ```
 vagrant up
 vagrant ssh
-в /vagrant/script.sh выставляем нужный адрес у переменной $EMAIL
+в /vagrant/script.sh выставляем $EMAIL,$X,Y
 bash /vagrant/script.sh
 ```
 
