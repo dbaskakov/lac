@@ -20,16 +20,17 @@ cat access.log | cut -d '-' -f 1 | uniq -c | sort -r | head -n $X
 cat access.log |  grep -E 'http../' | awk '{ print $11 }' | uniq -c | sort -r
 
 # - все ошибки c момента последнего запуска
-grep -i 404 access.log
+grep -i 404 access.log | wc -l
 
 
 # список всех кодов возврата с указанием их кол-ва с момента последнего запуска
 
 # в письме должно быть прописан обрабатываемый временной диапазон
-
+date- currentdate
+date- currentdate -60min
 
 # должна быть реализована защита от мультизапуска
-
+set -o noclobber + rm rf log
 
 
 
